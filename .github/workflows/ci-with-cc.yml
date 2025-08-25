@@ -22,6 +22,6 @@ jobs:
         with:
           develocity-access-key: ${{ secrets.MY_DEVELOCITY_ACCESS_KEY }}
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew build --configuration-cache
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
