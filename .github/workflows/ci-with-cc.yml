@@ -1,4 +1,4 @@
-name: Build
+name: Build with CC
 
 on:
   push:
@@ -22,5 +22,6 @@ jobs:
         with:
           develocity-access-key: ${{ secrets.MY_DEVELOCITY_ACCESS_KEY }}
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+          cache-read-only: false
       - name: Build with Gradle
         run: ./gradlew build --configuration-cache
