@@ -1,0 +1,27 @@
+name: Build with special treatment on cancel
+
+on:
+  push:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@80e941e61874822d2a89974089c4915748e8f4b7
+        with:
+          develocity-access-key: ${{ secrets.MY_DEVELOCITY_ACCESS_KEY }}
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+          cache-read-only: false
+      - name: Build with Gradle
+        run: ./gradlew build --configuration-cache
